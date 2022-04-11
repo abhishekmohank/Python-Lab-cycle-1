@@ -17,63 +17,84 @@ Original file is located at
 
 # Finally, generate a payslip.
 
-name = input("Enter name ")
-code = int(input("Enter code"))
-BS = int(input("Enter code"))
+#function - to calculate gross salary , arguements : Basic Pay , DA ,HRA , MA
+def gross_salay(bp,da,hra,ma):
+  grossSalary = bp+da+hra+ma
+  return grossSalary
 
-if(BS<10000 ):
-  DA=(5/100)*BS
-  HRA=(2.5/100)*BS
-  MA=500
-  PT=20
-  PF=(8/100)*BS
-  IT=0
+#function - to calculate deduction , arguements : Pf, Pt,It
+def deduction(pf,pt,it):
+  deduct = pf+pt+it
+  return deduct
 
-elif(BS<30000 ):
-   DA=(7.5/100)*BS
-   HRA=(5/100)*BS
-   MA=2500
-   PT=60
-   PF=(8/100)*BS
-   IT=0
-elif(BS<50000 ):
-   DA=(25/100)*BS
-   HRA=(11/100)*BS
-   MA=5000
-   PT=11
-   PF=(11/100)*BS
-   IT=11
+#function - to calculate net salary , arguements : Gross Salary and Deduction
+def net_salary(GS,D):
+  net_sal = GS - D
+  return net_sal
 
+name = input("Enter your name ")
+code = int(input("Enter your code "))
+basic_pay = int(input("Enter your basic pay "))
+
+#if basic pay is less than 10,000.
+if basic_pay<10000:
+  DA = (basic_pay*5)/100
+  HRA = (basic_pay*2.5)/100
+  MA = 500
+  PT = 20
+  PF = (basic_pay*8)/100
+  IT = 0
+  Gross_Salary = gross_salay(basic_pay,DA,HRA,MA)
+  Deduction = deduction(PF,PT,IT)
+  Net_Salary = net_salary(Gross_Salary,Deduction)
+
+#if basic pay is greater than 10,000 and less than 30,000.
+elif basic_pay>=10000 and basic_pay<30000:
+  DA = (basic_pay*7.5)/100
+  HRA = (basic_pay*5)/100
+  MA = 2500
+  PT = 60
+  PF = (basic_pay*8)/100
+  IT = 0
+  Gross_Salary = gross_salay(basic_pay,DA,HRA,MA)
+  Deduction = deduction(PF,PT,IT)
+  Net_Salary = net_salary(Gross_Salary,Deduction)
+
+#if basic pay is greater than 30,000 and less than 50,000.
+elif basic_pay>=30000 and basic_pay<50000:
+  DA = (basic_pay*11)/100
+  HRA = (basic_pay*7.5)/100
+  MA = 5000
+  PT = 60
+  PF = (basic_pay*11)/100
+  IT = (basic_pay*11)/100
+  Gross_Salary = gross_salay(basic_pay,DA,HRA,MA)
+  Deduction = deduction(PF,PT,IT)
+  Net_Salary = net_salary(Gross_Salary,Deduction)
+
+#if the basic pay is above 50,000.
 else:
-    DA=(25/100)*BS
-    HRA=(11/100)*BS
-    MA=7000
-    PT=80
-    PF=(12/100)*BS
-    IT=20
+  DA = (basic_pay*25)/100
+  HRA = (basic_pay*11)/100
+  MA = 7000
+  PT = 80
+  PF = (basic_pay*12)/100
+  IT = (basic_pay*20)/100
+  Gross_Salary = gross_salay(basic_pay,DA,HRA,MA)
+  Deduction = deduction(PF,PT,IT)
+  Net_Salary = net_salary(Gross_Salary,Deduction)
 
-def Gross_salary ():
-  GS=BS+DA+HRA+MA
-
-  return GS
-
-def Deduction():
-  D = PT+PF+IT
-  
-  return D
-
-def Net_salary():
-  GS = Gross_salary()
-  D = Deduction()
-  N = GS-D
-
-
-  print("name", name)
-  print("code", code)
-  print("Basicpay", BS)
-  print("Net salary", N)
-  print("Gross salary", GS)
-
-  return N
-
-Net_salary()
+#printing the payment slip
+print("\nPayment Slip")
+print("Employee Name         : "+name)
+print("Employee Code         :",code)
+print("Employee Basic Pay    : Rs.",basic_pay)
+print("Employee DA           : Rs.",DA)
+print("Employee HRA          : Rs.",HRA)
+print("Employee MA           : Rs.",MA)
+print("Employee PT           : Rs.",PT)
+print("Employee PF           : Rs.",PF)
+print("Employee IT           : Rs.",IT)
+print("Employee Gross Salary : Rs.",Gross_Salary)
+print("Employee Deduction    : Rs.",Deduction)
+print("Employee Net Salary   : Rs.",Net_Salary)

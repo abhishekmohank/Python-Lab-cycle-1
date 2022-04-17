@@ -18,28 +18,36 @@ Original file is located at
 #area enclosed by both triangles and each triangle's contribution (%) 
 
 #towards it.
-
-def get_side():
-  a = int (input("enter the first side of the triangle"))
-  b = int (input("enter the second side of the triangle"))
-  c = int (input("enter the third side of the triangle"))
+def get_sides():
+  a = float(input("Enter the side A :"))
+  b = float(input("Enter the side B :"))
+  c = float(input("Enter the side C :"))
   return a,b,c
 
-def calc_area(a,b,c):
-  s = ( a + b + c ) / 2
+#function - to calculate the area of the triangle.
+def calculate_area(a,b,c):
+  s = (a+b+c)/2
   area = (s*(s-a)*(s-b)*(s-c))**(1/2)
   return area
 
-side1,side2,side3 = get_side()
-Area = calc_area(side1,side2,side3)
-print(Area)
+#function - to calculate the total area and % contribution of each triangle.
+def totalAreaAndContribution(area_1,area_2):
+  #total area calculation
+  total_area = area_1 + area_2
+  #calculating the contribution of each triangle to area
+  contribution_of_triangle1 = (100*area_1)/total_area
+  contribution_of_triangle2 = (100*area_2)/total_area
+  print("The total area is ",total_area)
+  print("The % contribution of triangle 1 to total area is ",round(contribution_of_triangle1,2),"%")
+  print("The % contribution of triangle 2 to total area is ",round(contribution_of_triangle2,2),"%")
 
-side4,side5,side6 = get_side()
-Area2 = calc_area(side4,side5,side6)
-print(Area2)
+print("First Triangle")
+a1,b1,c1 = get_sides()
+area_1 = calculate_area(a1,b1,c1)
+print("The area of first triangle is ",area_1)
 
-Total_area= Area + Area2
-print("Total area:",Total_area)
-
-print("cont of triangle 1",(calc_area(side1,side2,side3)/Total_area)*100)
-print("cont of traingle 2",(calc_area(side4,side5,side6)/Total_area)*100)
+print("Second Triangle")
+a2,b2,c2 = get_sides()
+area_2 = calculate_area(a2,b2,c2)
+print("The area of second triangle is ",area_2)
+totalAreaAndContribution(area_1,area_2)

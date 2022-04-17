@@ -28,58 +28,73 @@ Original file is located at
 #Define function for each of the task.
 
 
-st=str(input("enter any string: "))
-def sub_str1():
-  for i in range(0,len(st)+1):
-    for j in range(i+1,len(st)+1):
-      s=st[i:j]
-      print(s)
+def sub_strings(name):
+  for i in range(0,len(name)+1):
+    for j in range(i+1,len(name)+1):
+      s = name[i:j]
+      print(s, end=",")
 
-def sub_str2():   
-  k= int(input("enter the length type of substring: "))
-  for i in range(0,len(st)+1):
-    for j in range(i+1,len(st)+1):
-      s=st[i:j]
-      if(len(s)==k):
-       print(s)
+#function - to print all possible substrings with length specified
+def sub_strings_with_length(name,size):
+  for i in range(0,len(name)+1):
+    for j in range(i+1,len(name)+1):
+      s = name[i:j]
+      if len(s)==size:
+        print(s,end=" , ")
 
-def sub_str3():   
-  k= int(input("enter the length type of substring: "))
-  n= int(input("enter the number of distinct characters: "))
-  for i in range(0,len(st)+1):
-    for j in range(i+1,len(st)+1):
-      s=st[i:j]
-    if(len(s)==k and len(set(s))==n):
-       print(s)
+#function - to print all possible substrings with length and no of distinct characters specified
+def sub_strings_with_length_with_N_characters(name,size,N):
+  for i in range(0,len(name)+1):
+    for j in range(i+1,len(name)+1):
+      s = name[i:j]
+      if len(s)==size:
+        distinct = set(s)
+        if len(distinct) == N:
+          print(s,end=" , ")
 
-def sub_str4(): 
-  l=[]
-  n= int(input("enter the number of distinct characters"))
-  for i in range(0,len(st)+1):
-    for j in range(i+1,len(st)+1):
-      s=st[i:j]
-      if(len(set(s))==n):
-       l.append(s)
-  print(l)
-  m=len(max(l,key=len))
-  for i in range(len(l)):
-    if(len(l[i])==m):
-      print(l[i])
+#function - to print all possible substrings with max length and N no of distinct characters
+def sub_strings_with_max_length_with_N_characters(name,N):
+  string_list = []
+  for i in range(0,len(name)+1):
+    for j in range(i+1,len(name)+1):
+      s = name[i:j]
+      distinct = set(s)
+      if len(distinct) == N:
+        string_list.append(s)
+
+  length = len(max(string_list,key = len)) 
+  for i in string_list:
+    if len(i)==length:
+      print(i,end=" , ")
+
+#function - to print all the paliandrome substrings
+def print_paliandrome(name):
+  for i in range(0,len(name)+1):
+    for j in range(i+1,len(name)+1):
+      s = name[i:j]
+      reverse = s[::-1]
+      if reverse == s:
+        print(s , end = " , ")
 
 
-def sub_str5():
-  for i in range(0,len(st)+1):
-    for j in range(i+1,len(st)+1):
-      s=st[i:j]
-      temp=s[::-1]
-      if(s==temp):
-        print(s)
-  
+name = input("Enter the string ")
+print("All the Possible Sub Strings are")
+sub_strings(name) #prints all possible sub-strings
 
+length = int(input("\nEnter the length of the substrings you want to print "))
+#prints all possible sub-strings with length specified
+print("\nAll the Possible Sub Strings with length ",length," are")
+sub_strings_with_length(name,length) 
 
-        
-sub_str1()
-# sub_str2()
-#sub_str3()
-#sub_str4()
-sub_str5()
+num_of_distinct = int(input("\nEnter the no of distinct characters you want to print "))
+#prints all possible sub-strings with length and no of distinct characters
+print("\nAll the Possible Sub Strings with length ",length,"and ",num_of_distinct," distinct characters are")
+sub_strings_with_length_with_N_characters(name,length,num_of_distinct)
+
+#prints all sub-strings with max-length and no of distinct characters given
+print("\nSub Strings with Max - Length and ",num_of_distinct," characters")
+sub_strings_with_max_length_with_N_characters(name,num_of_distinct)
+
+#prints all the paliandrome sub-strings
+print("\nThe Paliandrome Strings are ")
+print_paliandrome(name)

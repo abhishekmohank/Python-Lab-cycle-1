@@ -30,46 +30,53 @@ Original file is located at
 
 def print_in_a_range(l,u):
   for i in range(l,u+1):
+    #function - check_happy is used to check whether i is a happy number or not
     isHappy = check_happy(i)
     if isHappy:
       print(i,end=",")
 
-
+#function - to print happy number's upto to a number
 def print_upto_n(n):
-   for i in range(1,n+1):
-     isHappy = check_happy(i)
-     if isHappy:
-       print(i, end=",")
+  for i in range(1,n+1):
+    #function - check_happy is used to check whether i is a happy number or not
+    isHappy = check_happy(i)
+    if isHappy:
+      print(i, end=",")
 
 
+#function - check whether the number is happy or not
 def check_happy(num):
-  happy_sum =0
-  numcopy= num
-  is_happy=False
   for i in range(0,101):
-    while numcopy>0:
-      remainder = numcopy % 10
-      numcopy = numcopy //10
+    happy_sum = 0
+    while num>0:
+      remainder = num % 10
+      num = num //10
       happy_sum = happy_sum + remainder**2
+    
     if(happy_sum == 1):
-      is_happy=True
-      break
+      #returns true if the sum of the squares of its digit is 1
+      return True
     else:
-      numcopy = happy_sum
-      happy_sum = 0
-  return is_happy
+      #if the sum is not 1 , then the sum is again passed to the loop
+      num = happy_sum
+      #after 100 iterations , the number is declared as sad
+      if(i == 100):
+        return False
+      
+        
+#to - check whether a number is happy or not
 num = int(input("Enter the number : "))
 result = check_happy(num)
-if result==True:
-  print(num,"is happy")
+if result:
+  print("Happy")
 else:
-  print(num,"is sad")
+  print("Sad")
 
-
-
-lower_range = int(input("Enter the lower limits : "))
-upper_range = int(input("Enter the upper range : "))
+#to print happy numbers between a range
+lower_range = int(input("Enter the lower limit ")) 
+upper_range = int(input("Enter the upper limit ")) 
 print_in_a_range(lower_range,upper_range)
 
-limit = int(input("Enter the numbers upto which you want to print : "))
+#to print happy numbers upto to n value
+limit = int(input("\nEnter the numbers upto which you want to print "))
 print_upto_n(limit)

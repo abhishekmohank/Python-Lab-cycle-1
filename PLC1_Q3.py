@@ -32,69 +32,73 @@ def net_salary(GS,D):
   net_sal = GS - D
   return net_sal
 
-name = input("Enter your name ")
-code = int(input("Enter your code "))
+#function to generate the payment slip.
+def generatePaymentSlip(name,code,basic_pay):
+  #if basic pay is less than 10,000.
+  if basic_pay<10000:
+    DA = (basic_pay*5)/100
+    HRA = (basic_pay*2.5)/100
+    MA = 500
+    PT = 20
+    PF = (basic_pay*8)/100
+    IT = 0
+    Gross_Salary = gross_salay(basic_pay,DA,HRA,MA)
+    Deduction = deduction(PF,PT,IT)
+    Net_Salary = net_salary(Gross_Salary,Deduction)
+
+  #if basic pay is greater than 10,000 and less than 30,000.
+  elif basic_pay>=10000 and basic_pay<30000:
+    DA = (basic_pay*7.5)/100
+    HRA = (basic_pay*5)/100
+    MA = 2500
+    PT = 60
+    PF = (basic_pay*8)/100
+    IT = 0
+    Gross_Salary = gross_salay(basic_pay,DA,HRA,MA)
+    Deduction = deduction(PF,PT,IT)
+    Net_Salary = net_salary(Gross_Salary,Deduction)
+
+  #if basic pay is greater than 30,000 and less than 50,000.
+  elif basic_pay>=30000 and basic_pay<50000:
+    DA = (basic_pay*11)/100
+    HRA = (basic_pay*7.5)/100
+    MA = 5000
+    PT = 60
+    PF = (basic_pay*11)/100
+    IT = (basic_pay*11)/100
+    Gross_Salary = gross_salay(basic_pay,DA,HRA,MA)
+    Deduction = deduction(PF,PT,IT)
+    Net_Salary = net_salary(Gross_Salary,Deduction)
+
+  #if the basic pay is above 50,000.
+  else:
+    DA = (basic_pay*25)/100
+    HRA = (basic_pay*11)/100
+    MA = 7000
+    PT = 80
+    PF = (basic_pay*12)/100
+    IT = (basic_pay*20)/100
+    Gross_Salary = gross_salay(basic_pay,DA,HRA,MA)
+    Deduction = deduction(PF,PT,IT)
+    Net_Salary = net_salary(Gross_Salary,Deduction)
+
+  #printing the payment slip
+  print("\nPayment Slip")
+  print("Employee Name         : "+name)
+  print("Employee Code         :",code)
+  print("Employee Basic Pay    : Rs.",basic_pay)
+  print("Employee DA           : Rs.",DA)
+  print("Employee HRA          : Rs.",HRA)
+  print("Employee MA           : Rs.",MA)
+  print("Employee PT           : Rs.",PT)
+  print("Employee PF           : Rs.",PF)
+  print("Employee IT           : Rs.",IT)
+  print("Employee Gross Salary : Rs.",Gross_Salary)
+  print("Employee Deduction    : Rs.",Deduction)
+  print("Employee Net Salary   : Rs.",Net_Salary)
+
+
+EmployeeName = input("Enter your name ")
+EmployeeCode = int(input("Enter your code "))
 basic_pay = int(input("Enter your basic pay "))
-
-#if basic pay is less than 10,000.
-if basic_pay<10000:
-  DA = (basic_pay*5)/100
-  HRA = (basic_pay*2.5)/100
-  MA = 500
-  PT = 20
-  PF = (basic_pay*8)/100
-  IT = 0
-  Gross_Salary = gross_salay(basic_pay,DA,HRA,MA)
-  Deduction = deduction(PF,PT,IT)
-  Net_Salary = net_salary(Gross_Salary,Deduction)
-
-#if basic pay is greater than 10,000 and less than 30,000.
-elif basic_pay>=10000 and basic_pay<30000:
-  DA = (basic_pay*7.5)/100
-  HRA = (basic_pay*5)/100
-  MA = 2500
-  PT = 60
-  PF = (basic_pay*8)/100
-  IT = 0
-  Gross_Salary = gross_salay(basic_pay,DA,HRA,MA)
-  Deduction = deduction(PF,PT,IT)
-  Net_Salary = net_salary(Gross_Salary,Deduction)
-
-#if basic pay is greater than 30,000 and less than 50,000.
-elif basic_pay>=30000 and basic_pay<50000:
-  DA = (basic_pay*11)/100
-  HRA = (basic_pay*7.5)/100
-  MA = 5000
-  PT = 60
-  PF = (basic_pay*11)/100
-  IT = (basic_pay*11)/100
-  Gross_Salary = gross_salay(basic_pay,DA,HRA,MA)
-  Deduction = deduction(PF,PT,IT)
-  Net_Salary = net_salary(Gross_Salary,Deduction)
-
-#if the basic pay is above 50,000.
-else:
-  DA = (basic_pay*25)/100
-  HRA = (basic_pay*11)/100
-  MA = 7000
-  PT = 80
-  PF = (basic_pay*12)/100
-  IT = (basic_pay*20)/100
-  Gross_Salary = gross_salay(basic_pay,DA,HRA,MA)
-  Deduction = deduction(PF,PT,IT)
-  Net_Salary = net_salary(Gross_Salary,Deduction)
-
-#printing the payment slip
-print("\nPayment Slip")
-print("Employee Name         : "+name)
-print("Employee Code         :",code)
-print("Employee Basic Pay    : Rs.",basic_pay)
-print("Employee DA           : Rs.",DA)
-print("Employee HRA          : Rs.",HRA)
-print("Employee MA           : Rs.",MA)
-print("Employee PT           : Rs.",PT)
-print("Employee PF           : Rs.",PF)
-print("Employee IT           : Rs.",IT)
-print("Employee Gross Salary : Rs.",Gross_Salary)
-print("Employee Deduction    : Rs.",Deduction)
-print("Employee Net Salary   : Rs.",Net_Salary)
+generatePaymentSlip(EmployeeName,EmployeeCode,basic_pay)

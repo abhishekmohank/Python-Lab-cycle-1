@@ -13,19 +13,48 @@ Original file is located at
 #c. Difference between the product of digits at the odd position 
 # find the product of digits at the even position.
 
-num= int(input("Enter a number "))
-d4 = num%10
-num = num//10
-d3 = num%10
-num = num//10
-d2 = num%10
-num = num//10
-d1 = num%10
-num = num//10
+#function to extract digits of the number.
+def extractDigits(num):
+  #extracting each digits into variables digit_1 to digit_4 respectively
+  digit_4 = num%10
+  num = num//10
+  digit_3 = num%10
+  num = num//10
+  digit_2 = num%10
+  num = num//10
+  digit_1 = num%10
+  num = num//10
+  return digit_1,digit_2,digit_3,digit_4
 
-sum= d4 + d3 + d2 + d1 
-reverse = d4*1000 + d3*100 + d2*10 +d1
-diference = (d1*d3)-(d2*d4)
-print("The Sum is ",sum)
-print("The reverse is ",reverse)
-print("The diference is ",diference)
+#function to calculate the sum of digits.
+
+def sumOfDigits(digit_1,digit_2,digit_3,digit_4):
+  sum = 0
+
+  #sum of each digits stored to variable sum
+    
+   
+  sum = digit_1 + digit_2 + digit_3 + digit_4
+  print("The sum is ",sum)
+
+#function to reverse the number.
+def reverseNumber(digit_1,digit_2,digit_3,digit_4):
+  #reverse of the number stored to variable reverse
+  reverse = (digit_4*1000) + (digit_3*100) + (digit_2*10) + digit_1
+  print("The reverse is ",reverse)
+
+#function to the compute the difference between the products.
+def diffOfProductofDigits(digit_1,digit_2,digit_3,digit_4):
+  #product of digits at odd positions are stored to product_of_odd
+  product_of_odd = digit_1*digit_3
+  #product of digits at even positions are stored to product_of_even
+  product_of_even = digit_2*digit_4
+  #the difference of product of odd and even is stored to difference
+  difference = product_of_odd - product_of_even 
+  print("The difference is ",difference)
+
+num = int(input("Enter a four digit number : "))
+digit1,digit2,digit3,digit4 = extractDigits(num)
+sumOfDigits(digit1,digit2,digit3,digit4)
+diffOfProductofDigits(digit1,digit2,digit3,digit4)
+reverseNumber(digit1,digit2,digit3,digit4)
